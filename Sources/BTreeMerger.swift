@@ -641,7 +641,7 @@ internal enum BTreePart<Key: Comparable, Value> {
 extension BTreePart {
     var count: Int {
         switch self {
-        case .element(_, _):
+        case .element:
             return 1
         case .node(let node):
             return node.count
@@ -687,7 +687,7 @@ internal extension BTreeStrongPath {
     }
 
     /// Move sideways `n` slots to the right, skipping over subtrees along the way.
-    internal mutating func skipForward(_ n: Int) {
+    mutating func skipForward(_ n: Int) {
         if !node.isLeaf {
             for i in 0 ..< n {
                 let s = slot! + i
